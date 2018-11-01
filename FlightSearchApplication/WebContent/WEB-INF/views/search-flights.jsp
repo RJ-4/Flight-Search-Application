@@ -14,7 +14,7 @@
 		<div class = "container py-5 text-center text-light">
 
 			<div class="row">
-				<div class="col-5">
+				<div class="col-lg-5 col-md-7 col-sm-8">
 					<div class="card bg-info card-form">
 						<div class="card-body">
 							<h3 class = "py-4">Search Flights</h3>
@@ -25,6 +25,7 @@
 											<form:input class="form-control" 
 														placeholder="Departure Location" path="departureLocation"
 														name="departureLocation"/>	
+											<form:errors path="departureLocation" class="text-warning"></form:errors>
 										</div>								
 									</div>
 									<div class="col">
@@ -32,6 +33,7 @@
 											<form:input class="form-control" 
 														placeholder="Arrival Location" path="arrivalLocation" 
 														name="arrivalLocation"/>
+											<form:errors path="arrivalLocation" class="text-warning"></form:errors>
 										</div>
 									</div>
 								</div>		
@@ -39,8 +41,8 @@
 									<div class="col">
 										<div class="form-group">
 											<input type="date" class="form-control" 
-													placeholder="Departure Date (dd-mm-yyyy)" path="departureDate"
-													name="departureDate"/>	
+													placeholder="Departure Date (dd-mm-yyyy)"
+													name="departureDate" value="2013-01-01"/>	
 										</div>								
 									</div>
 								</div>
@@ -61,7 +63,7 @@
 								<div class="form-row">
 									<div class="col">
 										<div class="form-group">
-											<select name="sort" class="form-control">	
+											<select name="sortBy" class="form-control">	
 												<option value="Sort by Fare" selected>Sort by Fare</option>
 												<option value="Sort by Fare and Duration"> 
 															 Sort by Fare and Duration</option>
@@ -77,13 +79,61 @@
 					</div>
 				</div>
 				
-				<div class="col-7">
+				<div class="col-lg-7 col-md-5 col-sm-4">
 					<img src="https://static.tacdn.com/img2/flights/airlines/hero_images/_GenericHero_1168x606.jpg"
 							class="rounded-circle img-fluid">
 				</div>
 			</div>
 		</div>
 		<hr style="border-bottom: 1px solid black">
+		
+		<div class="container bg-light py-4" modelAttribute="isFlightsFound">
+			<h3 class="text-center text-info pb-2">Result</h3>
+			<c:if test="!${isFlightsFound}">
+				<span class="text-danger">No flights found!!!</span>
+			</c:if>
+
+			<c:if test="${isFlightsFound}">
+				<div modelAttribute="filteredFlights">
+					<table class="table table-responsive">
+						<thead class="thead-dark text-light">
+							<tr>
+								<th>Flight No.</th>
+								<th>Departure Location</th>
+								<th>Arrival Location</th>
+								<th>Valid Till</th>
+								<th>Flight Time</th>
+								<th>Flight Duration</th>
+								<th>Fare</th>
+								<th>Seat Availability</th>
+								<th>Class</th>
+							</tr>
+						</thead>
+						<tbody class="bg-light text-dark text-center">
+							<c:forEach var="flight" items="${filteredFlights}">
+								<tr>
+									<td>${flight.flightNumber}</td>
+									<td>${flight.departureLocation}</td>
+									<td>${flight.arrivalLocation}</td>
+									<td>${flight.validTill}</td>
+									<td>${flight.flightTime}</td>
+									<td>${flight.flightDuration}</td>
+									<td>${flight.fare}</td>
+									<td>${flight.seatAvailability}</td>
+									<td>${flight.flightClass}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				
+				</div>
+			
+			</c:if>
+
+		</div>
+		
+		
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

@@ -1,55 +1,31 @@
-package com.nagarro.java.training.flightSearch.models;
+package com.nagarro.java.training.flightSearch.dto;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.springframework.stereotype.Component;
 
-@Entity
-@Table(name = "flights")
-public class Flight {
+@Component
+public class FlightSearchOutputDTO {
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "flight_number")
 	private String flightNumber;
 	
-	@Column(name = "departure_location")
-	@NotNull(message = "Departure Location cannot be empty!!!")
-	@Size(min = 1, message = "Departure Location cannot be empty!!!")
 	private String departureLocation;
 	
-	@Column(name = "arrival_location")
-	@NotNull(message = "Departure Location cannot be empty!!!")
-	@Size(min = 1, message = "Departure Location cannot be empty!!!")
 	private String arrivalLocation;
 	
-	@Column(name = "valid_till")
 	private LocalDate validTill;
 	
-	@Column(name = "flight_time")
 	private int flightTime;
 	
-	@Column(name = "flight_duration")
 	private double flightDuration;
 	
-	@Column(name = "fare")
 	private int fare;
 	
-	@Column(name = "seat_availability")
 	private String seatAvailability;
 	
-	@Column(name = "flight_class")
 	private String flightClass;
 	
 	public int getFlightTime() {
@@ -84,6 +60,8 @@ public class Flight {
 		this.seatAvailability = seatAvailability;
 	}
 
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -133,3 +111,4 @@ public class Flight {
 		this.flightClass = flightClass;
 	}
 }
+
