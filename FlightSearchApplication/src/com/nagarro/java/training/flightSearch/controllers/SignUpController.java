@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nagarro.java.training.flightSearch.models.Flight;
 import com.nagarro.java.training.flightSearch.models.User;
 import com.nagarro.java.training.flightSearch.services.SignUpService;
 import com.nagarro.java.training.flightSearch.validations.Validations;
@@ -58,6 +59,8 @@ public class SignUpController {
 			try {
 				
 				signUpService.registerNewUser(newUser);
+				
+				model.addAttribute("flights", new Flight());
 
 				return "search-flights";
 				

@@ -9,8 +9,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	</head>
 	<body class = "bg-light">
+		<h1 class = "text-light bg-secondary py-4 text-center">Flight Search</h1>
 		<div class = "container m-auto w-50 py-4 text-center">
-			<h1 class = "text-dark py-4">Flight Search</h1>
+			<h2 class = "text-success py-4 text-center">Sign Up</h2>
 			<div class = "form-group">
 				<form:form action = "signUp" method = "post" modelAttribute="user">
 					
@@ -35,7 +36,7 @@
 					<form:errors path="password" class="text-danger"/>
 					<input type="password" class="form-control m-4 form-control-lg" name="confirm-password" 
 								placeholder="Confirm Password"/>
-					<input class="btn btn-primary m-4 btn-lg" type="submit" value="Sign Up"></input>
+					<input class="btn btn-success m-4 btn-lg" type="submit" value="Sign Up"></input>
 				</form:form>
 			</div>
 			<a href="${pageContext.request.contextPath}/login">Already registered? Login</a>					

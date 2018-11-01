@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nagarro.java.training.flightSearch.models.Flight;
 import com.nagarro.java.training.flightSearch.models.User;
 import com.nagarro.java.training.flightSearch.services.LoginService;
 import com.nagarro.java.training.flightSearch.validations.Validations;
@@ -46,6 +47,8 @@ public class LoginController {
 			
 				loginService.checkUser(existingUser);
 		
+				model.addAttribute("flights", new Flight());
+				
 				return "search-flights";
 				
 			} catch (Exception e) {
