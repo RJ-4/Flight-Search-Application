@@ -5,40 +5,31 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Sign Up</title>
+		<title>Login</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	</head>
 	<body class = "bg-light">
 		<div class = "container m-auto w-50 py-4 text-center">
 			<h1 class = "text-dark py-4">Flight Search</h1>
 			<div class = "form-group">
-				<form:form action = "signUp" method = "post" modelAttribute="user">
-					
-					<span modelAttribute="usernameAlreadyExists">
-						<c:if test="${usernameAlreadyExists}">
-							<span class="text-danger">Username already exists</span>
+				<form:form action="loginUser" method="post" modelAttribute="user">
+				
+					<span modelAttribute="loginUnsuccessful">
+						<c:if test="${loginUnsuccessful}">
+							<span class="text-danger">Invalid Username/Password</span>
 						</c:if>
 					</span>
 					
 					<form:input class="form-control m-4 form-control-lg" path="username" name="username" 
 								placeholder="Username"/>
 					<form:errors path="username" class="text-danger"/>
-					
-					<span modelAttribute="passwordsDontMatch">
-						<c:if test="${passwordsDontMatch}">
-							<span class="text-danger">Passwords Don't Match</span>
-						</c:if>
-					</span>
-					
 					<form:password class="form-control m-4 form-control-lg" path="password" name="password" 
-								placeholder="Password"/>
-					<form:errors path="password" class="text-danger"/>
-					<input type="password" class="form-control m-4 form-control-lg" name="confirm-password" 
-								placeholder="Confirm Password"/>
-					<input class="btn btn-primary m-4 btn-lg" type="submit" value="Sign Up"></input>
+									placeholder="Password"/>
+					<form:errors path="password" class="text-danger d-block"/>
+					<input class="btn btn-primary m-4 btn-lg ml-auto mr-auto d-block" type="submit" value="Login"></input>
 				</form:form>
 			</div>
-			<a href="${pageContext.request.contextPath}/login">Already registered? Login</a>					
+			<a href="${pageContext.request.contextPath}/sign-up">Not registered? Sign up</a>					
 		</div>
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

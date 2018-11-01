@@ -13,13 +13,13 @@ public class User {
 
 	@Column(name = "username")
 	@Id
-	@NotNull(message = "username cannot be empty")
-	@Size(min = 1, message = "username cannot be empty")
+	@NotNull(message = "Username cannot be empty")
+	@Size(min = 1, message = "Username cannot be empty")
 	private String username;
 	
 	@Column(name = "password")
-	@NotNull(message = "password cannot be empty")
-	@Size(min = 1, message = "password cannot be empty")
+	@NotNull(message = "Password cannot be empty")
+	@Size(min = 1, message = "Password cannot be empty")
 	private String password;
 
 	public String getUsername() {

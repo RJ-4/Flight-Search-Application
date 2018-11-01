@@ -1,5 +1,9 @@
 package com.nagarro.java.training.flightSearch.controllers;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -17,9 +21,18 @@ import com.nagarro.java.training.flightSearch.models.User;
 public class HomeController {
 	
 	@RequestMapping("/")
+	public void redirectToLoginForm(HttpServletResponse response){
+		try {
+			response.sendRedirect("login");
+		} catch (IOException e) {
+		
+		}
+	}
+	
+	@RequestMapping("/login")
 	public String showLoginForm(Model model){
 		model.addAttribute("user", new User());
-		return "login";
+		return "log-in";
 	}
 	
 	@RequestMapping("/sign-up")

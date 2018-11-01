@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nagarro.java.training.flightSearch.models.User;
@@ -31,15 +30,15 @@ public class LoginController {
 		validations.checkForWhiteSpaces(dataBinder);
 	}
 
-	@PostMapping("/loginUser")
-	public String loginUser(@Valid @ModelAttribute("user") User existingUser, Model model, 
-							BindingResult bindingResult) {
+	@RequestMapping("/loginUser")
+	public String loginUser(@Valid @ModelAttribute("user") User existingUser, BindingResult bindingResult, 
+							Model model) {
 		
-		boolean isLoginUnsuccessful = false;
+		boolean loginUnsuccessful = false;
 		
 		if(bindingResult.hasErrors()) {
 			
-			return "";
+			return "log-in";
 			
 		} else {
 			
@@ -51,11 +50,12 @@ public class LoginController {
 				
 			} catch (Exception e) {
 			
-				isLoginUnsuccessful = true;
+				System.out.println("----------------------------IN CATCH BLOCK------------------------------");
+				loginUnsuccessful = true;
 				
-				model.addAttribute("loginUnsuccessful", isLoginUnsuccessful);
-				
-				return "";
+				model.addAttribute("loginUnsuccessful", loginUnsuccessful);
+				System.out.println(loginUnsuccessful);
+				return "log-in";
 			}
 		}
 	}
