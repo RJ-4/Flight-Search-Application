@@ -14,6 +14,8 @@ import com.nagarro.java.training.flightSearch.dao.FlightSearchDAO;
 import com.nagarro.java.training.flightSearch.dto.FlightSearchInputDTO;
 import com.nagarro.java.training.flightSearch.models.Flight;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Repository
 public class FlightSearchDAOImpl implements FlightSearchDAO {
 
@@ -26,24 +28,19 @@ public class FlightSearchDAOImpl implements FlightSearchDAO {
 		
 		Session session = factory.getCurrentSession();
 		
-		String getFlightsQuery = "FROM Flight WHERE departureLocation = :departureLocation "
-									+ "AND arrivalLocation = :arrivalLocation "
-									+ "AND validTill >= :validTill "
-									+ "AND flightClass LIKE :flightClass AND seatAvailability = 'Y'";
+		String getFlightsQuery = GET_FLIGHTS_QUERY;
 	
 		Query query = session.createQuery(getFlightsQuery);
 		
-		query.setParameter("departureLocation", flightSearchInputDTO.getDepartureLocation());
+		query.setParameter(DEAPARTURE_LOCATION_QUERY_LABEL, flightSearchInputDTO.getDepartureLocation());
 		
-		query.setParameter("arrivalLocation", flightSearchInputDTO.getArrivalLocation());
+		query.setParameter(ARRIVAL_LOCATION_QUERY_LABEL, flightSearchInputDTO.getArrivalLocation());
 		
-		query.setParameter("validTill", flightSearchInputDTO.getDepartureDate());
+		query.setParameter(VALID_TILL_QUERY_LABEL, flightSearchInputDTO.getDepartureDate());
 		
-		query.setParameter("flightClass", "%" + flightSearchInputDTO.getFlightClass().charAt(0) + "%");
+		query.setParameter(FLIGHT_CLASS_QUERY_LABEL, "%" + flightSearchInputDTO.getFlightClass().charAt(0) + "%");
 		
 		List<Flight> filteredFlights = (List<Flight>)query.getResultList();
-		
-		System.out.println(filteredFlights);
 		
 		return filteredFlights;
 	

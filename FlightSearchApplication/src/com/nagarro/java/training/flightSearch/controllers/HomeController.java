@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nagarro.java.training.flightSearch.models.User;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Controller
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class,
 									HibernateJpaAutoConfiguration.class})
@@ -23,22 +25,27 @@ public class HomeController {
 	@RequestMapping("/")
 	public void redirectToLoginForm(HttpServletResponse response){
 		try {
-			response.sendRedirect("login");
+			response.sendRedirect(LOGIN_PAGE);
 		} catch (IOException e) {
 		
 		}
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(LOGIN_PAGE_MAPPING)
 	public String showLoginForm(Model model){
-		model.addAttribute("user", new User());
-		return "log-in";
+		model.addAttribute(USER_MODEL, new User());
+		return LOGIN_JSP_PAGE_PATH;
 	}
 	
-	@RequestMapping("/sign-up")
+	@RequestMapping(SIGN_UP_PAGE_MAPPING)
 	public String showSignUpForm(Model model){
-		model.addAttribute("user", new User());
-		return "sign-up";
+		model.addAttribute(USER_MODEL, new User());
+		return SIGN_UP_JSP_PAGE_PATH;
+	}
+	
+	@RequestMapping(LOGOUT_PAGE_MAPPING)
+	public String onLogout(Model model) {
+		return LOGOUT_JSP_PAGE_PATH;
 	}
 	
 	public static void main(String[] args) throws Exception {

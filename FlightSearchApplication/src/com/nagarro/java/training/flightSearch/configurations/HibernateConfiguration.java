@@ -2,6 +2,7 @@ package com.nagarro.java.training.flightSearch.configurations;
 
 import java.util.Properties;
 
+
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
@@ -16,10 +17,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Configuration
-@ComponentScan("{com.nagarro.java.training.flightSearch}")
+@ComponentScan(COMPONENT_SCAN)
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = {HIBERNATE_CONFIG_PROPERTIES_LOCATION})
 public class HibernateConfiguration {
 
 	@Autowired
@@ -29,7 +32,7 @@ public class HibernateConfiguration {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {"com.nagarro.java.training.flightSearch"});
+		sessionFactory.setPackagesToScan(new String[] {BASE_PACKAGE_FOR_SCAN});
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

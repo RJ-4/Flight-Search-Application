@@ -18,6 +18,8 @@ import com.nagarro.java.training.flightSearch.models.User;
 import com.nagarro.java.training.flightSearch.services.SignUpService;
 import com.nagarro.java.training.flightSearch.validations.Validations;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Controller
 public class SignUpController {
 	
@@ -33,9 +35,9 @@ public class SignUpController {
 		validations.checkForWhiteSpaces(dataBinder);
 	}
 	
-	@RequestMapping("/signUp")
+	@RequestMapping(SIGN_UP_CONTROLLER_MAPPING)
 	public String registerNewUser(@RequestParam("confirm-password") String confirmPassword, 
-									@Valid @ModelAttribute("user") User newUser, BindingResult bindingResult, 
+									@Valid @ModelAttribute(USER_MODEL) User newUser, BindingResult bindingResult, 
 									Model model){
 		
 		boolean usernameAlreadyExists = false;
@@ -44,7 +46,7 @@ public class SignUpController {
 		
 		if (bindingResult.hasErrors()) {
 			
-			return "sign-up";
+			return SIGN_UP_JSP_PAGE_PATH;
 		
 		} else if (!newUser.getPassword().equals(confirmPassword)) {
 
@@ -52,7 +54,7 @@ public class SignUpController {
 			
 			model.addAttribute("passwordsDontMatch", passwordsDontMatch);
 			
-			return "sign-up";
+			return SIGN_UP_JSP_PAGE_PATH;
 			
 		} else {
 			
@@ -60,9 +62,9 @@ public class SignUpController {
 				
 				signUpService.registerNewUser(newUser);
 				
-				model.addAttribute("flights", new Flight());
+				model.addAttribute(FLIGHTS_MODEL, new Flight());
 
-				return "search-flights";
+				return SEARCH_FLIGHTS_JSP_PAGE_PATH;
 				
 			} catch(Exception e) {
 				
@@ -70,7 +72,7 @@ public class SignUpController {
 
 				model.addAttribute("usernameAlreadyExists", usernameAlreadyExists);
 				
-				return "sign-up";
+				return SIGN_UP_JSP_PAGE_PATH;
 			}
 		}
 	}

@@ -9,8 +9,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	</head>
 	<body class = "bg-light">
+		
 		<h1 class = "text-light bg-secondary py-4 text-center">Flight Search</h1>
-		<a href="login" class="pb-2 mr-4" style="float:right">logout</a>
+		<a href="logout" class="pb-2 mr-4" style="float:right">logout</a>
 		<div class = "container py-5 text-center text-light">
 
 			<div class="row">
@@ -87,13 +88,10 @@
 		</div>
 		<hr style="border-bottom: 1px solid black">
 		
-		<div class="container bg-light py-4" modelAttribute="isFlightsFound">
-			<h3 class="text-center text-info pb-2">Result</h3>
-			<c:if test="!${isFlightsFound}">
-				<span class="text-danger">No flights found!!!</span>
-			</c:if>
-
-			<c:if test="${isFlightsFound}">
+		<c:if test="${isFlightsFound}">
+			<div class="container bg-light py-4" modelAttribute="isFlightsFound">
+				<h3 class="text-center text-info pb-2">Result</h3>
+				
 				<div modelAttribute="filteredFlights">
 					<table class="table table-responsive">
 						<thead class="thead-dark text-light">
@@ -127,12 +125,9 @@
 					</table>
 				
 				</div>
-			
-			</c:if>
+			</div>			
+		</c:if>
 
-		</div>
-		
-		
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

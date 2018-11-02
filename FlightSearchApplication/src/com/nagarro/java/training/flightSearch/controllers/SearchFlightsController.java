@@ -1,9 +1,7 @@
 package com.nagarro.java.training.flightSearch.controllers;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,6 +22,8 @@ import com.nagarro.java.training.flightSearch.models.Flight;
 import com.nagarro.java.training.flightSearch.services.SearchFlightsService;
 import com.nagarro.java.training.flightSearch.validations.Validations;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Controller
 public class SearchFlightsController {
 
@@ -39,19 +39,21 @@ public class SearchFlightsController {
 		validations.checkForWhiteSpaces(dataBinder);
 	}
 	
-	@GetMapping("/searchFlights")
-	public String searchForFlights(@Valid @ModelAttribute("flights") Flight currentSelection, 
+	
+	@GetMapping(SEARCH_FLIGHTS_CONTROLLER_MAPPING)
+	public String searchForFlights(@Valid @ModelAttribute(FLIGHTS_MODEL) Flight currentSelection, 
 										BindingResult bindingResult, 
 										@RequestParam("departureDate") String date, 
 										@RequestParam("flightClass") String flightClass, 
 										@RequestParam("sortBy") String outputPreference, 
 										Model model) {
 		
+		
 		boolean isFlightsFound = true;
 		
 		if(bindingResult.hasErrors()) {
 			
-			return "search-flights";
+			return SEARCH_FLIGHTS_JSP_PAGE_PATH;
 			
 		} else {
 			
@@ -72,7 +74,7 @@ public class SearchFlightsController {
 				
 				model.addAttribute("filteredFlights", filteredFlights);
 				
-				return "search-flights";
+				return SEARCH_FLIGHTS_JSP_PAGE_PATH;
 				
 			} catch(Exception e) {
 				
@@ -80,7 +82,7 @@ public class SearchFlightsController {
 				
 				model.addAttribute("isFlightsFound", isFlightsFound);
 				
-				return "search-flights";
+				return SEARCH_FLIGHTS_JSP_PAGE_PATH;
 			}
 			
 		}

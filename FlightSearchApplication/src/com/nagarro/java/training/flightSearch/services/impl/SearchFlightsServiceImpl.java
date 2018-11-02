@@ -13,6 +13,11 @@ import com.nagarro.java.training.flightSearch.dto.FlightSearchOutputDTO;
 import com.nagarro.java.training.flightSearch.models.Flight;
 import com.nagarro.java.training.flightSearch.modifyFare.ModifyFare;
 import com.nagarro.java.training.flightSearch.services.SearchFlightsService;
+import com.nagarro.java.training.flightSearch.sort.SortResults;
+import com.nagarro.java.training.flightSearch.sort.impl.SortByFare;
+import com.nagarro.java.training.flightSearch.sort.impl.SortByFareAndDuration;
+
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
 
 @Service
 public class SearchFlightsServiceImpl implements SearchFlightsService {
@@ -27,6 +32,10 @@ public class SearchFlightsServiceImpl implements SearchFlightsService {
 	
 	@Autowired
 	FlightSearchDAO flightSearchDAO;
+	
+	String outputPreference;
+	
+	SortResults sortResults;
 	
 	@Override
 	public List<FlightSearchOutputDTO> searchFlights(Flight currentInputSelection, LocalDate departureDate, 
@@ -46,15 +55,30 @@ public class SearchFlightsServiceImpl implements SearchFlightsService {
 		
 		filteredFlightsDTO = modifyFare(filteredFlightsDTO, flightClass);
 		
+		if(outputPreference.equals(SORT_BY_FARE)) {
+			
+			sortResults = new SortByFare();
+			
+			filteredFlightsDTO = sortResults.sortFlightList(filteredFlightsDTO);
+		
+		} else if(outputPreference.equals(SORT_BY_FARE_AND_DURATION)) {
+			
+			sortResults = new SortByFareAndDuration();
+			
+			filteredFlightsDTO = sortResults.sortFlightList(filteredFlightsDTO);
+		
+		}
+		
 		return filteredFlightsDTO;
 	}
 	
+
 	private List<FlightSearchOutputDTO> modifyFare(List<FlightSearchOutputDTO> filteredFlights, 
 													String flightClass) {
 		
 		for(FlightSearchOutputDTO filteredFlight: filteredFlights) {
 			
-			if(flightClass.equals("Business")){
+			if(flightClass.equals(BUSINESS_CLASS)){
 				
 				filteredFlight.setFare(modifyFare.modifyFare(filteredFlight.getFare()));
 			}

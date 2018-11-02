@@ -16,6 +16,8 @@ import com.nagarro.java.training.flightSearch.models.User;
 import com.nagarro.java.training.flightSearch.services.LoginService;
 import com.nagarro.java.training.flightSearch.validations.Validations;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Controller
 public class LoginController {
 
@@ -31,15 +33,15 @@ public class LoginController {
 		validations.checkForWhiteSpaces(dataBinder);
 	}
 
-	@RequestMapping("/loginUser")
-	public String loginUser(@Valid @ModelAttribute("user") User existingUser, BindingResult bindingResult, 
+	@RequestMapping(LOGIN_CONTROLLER_MAPPING)
+	public String loginUser(@Valid @ModelAttribute(USER_MODEL) User existingUser, BindingResult bindingResult, 
 							Model model) {
 		
 		boolean loginUnsuccessful = false;
 		
 		if(bindingResult.hasErrors()) {
 			
-			return "log-in";
+			return LOGIN_JSP_PAGE_PATH;
 			
 		} else {
 			
@@ -47,18 +49,19 @@ public class LoginController {
 			
 				loginService.checkUser(existingUser);
 		
-				model.addAttribute("flights", new Flight());
+				model.addAttribute(FLIGHTS_MODEL, new Flight());
 				
-				return "search-flights";
+				model.addAttribute("username", existingUser.getUsername());
+				
+				return SEARCH_FLIGHTS_JSP_PAGE_PATH;
 				
 			} catch (Exception e) {
 			
-				System.out.println("----------------------------IN CATCH BLOCK------------------------------");
 				loginUnsuccessful = true;
 				
 				model.addAttribute("loginUnsuccessful", loginUnsuccessful);
-				System.out.println(loginUnsuccessful);
-				return "log-in";
+				
+				return LOGIN_JSP_PAGE_PATH;
 			}
 		}
 	}

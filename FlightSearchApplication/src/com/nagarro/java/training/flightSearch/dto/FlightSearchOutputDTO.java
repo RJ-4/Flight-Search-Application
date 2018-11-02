@@ -1,7 +1,6 @@
 package com.nagarro.java.training.flightSearch.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.stereotype.Component;
 

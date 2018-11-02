@@ -7,19 +7,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Entity
-@Table(name = "user")
+@Table(name = USER_TABLE_TABLE_NAME)
 public class User {
 
-	@Column(name = "username")
+	@Column(name = USER_TABLE_USERNAME_COLUMN)
 	@Id
-	@NotNull(message = "Username cannot be empty")
-	@Size(min = 1, message = "Username cannot be empty")
+	@NotNull(message = USER_TABLE_USERNAME_VALIDATION_MESSAGE)
+	@Size(min = 1, message = USER_TABLE_USERNAME_VALIDATION_MESSAGE)
 	private String username;
 	
-	@Column(name = "password")
-	@NotNull(message = "Password cannot be empty")
-	@Size(min = 1, message = "Password cannot be empty")
+	@Column(name = USER_TABLE_PASSWORD_COLUMN)
+	@NotNull(message = USER_TABLE_PASSWORD_VALIDATION_MESSAGE)
+	@Size(min = 1, message = USER_TABLE_PASSWORD_VALIDATION_MESSAGE)
 	private String password;
 
 	public String getUsername() {

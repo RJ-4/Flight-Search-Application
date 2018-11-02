@@ -1,7 +1,6 @@
 package com.nagarro.java.training.flightSearch.models;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,44 +11,46 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Entity
-@Table(name = "flights")
+@Table(name = FLIGHTS_TABLE_NAME)
 public class Flight {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = FLIGHTS_TABLE_ID_COLUMN)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "flight_number")
+	@Column(name = FLIGHTS_TABLE_FLIGHT_NUMBER_COLUMN)
 	private String flightNumber;
 	
-	@Column(name = "departure_location")
-	@NotNull(message = "Departure Location cannot be empty!!!")
-	@Size(min = 1, message = "Departure Location cannot be empty!!!")
+	@Column(name = FLIGHTS_TABLE_DEPARTURE_LOCATION_COLUMN)
+	@NotNull(message = DEPARTURE_LOCATION_VALIDATION_MESSAGE)
+	@Size(min = 1, message = DEPARTURE_LOCATION_VALIDATION_MESSAGE)
 	private String departureLocation;
 	
-	@Column(name = "arrival_location")
-	@NotNull(message = "Departure Location cannot be empty!!!")
-	@Size(min = 1, message = "Departure Location cannot be empty!!!")
+	@Column(name = FLIGHTS_TABLE_ARRIVAL_LOCATION_COLUMN)
+	@NotNull(message = ARRIVAL_LOCATION_VALIDATION_MESSAGE)
+	@Size(min = 1, message = ARRIVAL_LOCATION_VALIDATION_MESSAGE)
 	private String arrivalLocation;
 	
-	@Column(name = "valid_till")
+	@Column(name = FLIGHTS_TABLE_VALID_TILL_COLUMN)
 	private LocalDate validTill;
 	
-	@Column(name = "flight_time")
+	@Column(name = FLIGHTS_TABLE_FLIGHT_TIME_COLUMN)
 	private int flightTime;
 	
-	@Column(name = "flight_duration")
+	@Column(name = FLIGHTS_TABLE_FLIGHT_DURATION_COLUMN)
 	private double flightDuration;
 	
-	@Column(name = "fare")
+	@Column(name = FLIGHTS_TABLE_FARE_COLUMN)
 	private int fare;
 	
-	@Column(name = "seat_availability")
+	@Column(name = FLIGHTS_TABLE_SEAT_AVAILABILITY_COLUMN)
 	private String seatAvailability;
 	
-	@Column(name = "flight_class")
+	@Column(name = FLIGHTS_TABLE_FLIGHT_CLASS_COLUMN)
 	private String flightClass;
 	
 	public int getFlightTime() {

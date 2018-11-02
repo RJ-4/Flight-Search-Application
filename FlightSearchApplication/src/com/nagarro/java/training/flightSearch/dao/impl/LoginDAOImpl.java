@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nagarro.java.training.flightSearch.dao.LoginDAO;
 import com.nagarro.java.training.flightSearch.models.User;
 
+import static com.nagarro.java.training.flightSearch.constants.Constants.*;
+
 @Repository
 public class LoginDAOImpl implements LoginDAO {
 
@@ -22,13 +24,13 @@ public class LoginDAOImpl implements LoginDAO {
 
 		Session session = factory.getCurrentSession();
 		
-		String loginQuery = "FROM User where username = :username AND password = :password";
+		String loginQuery = LOGIN_QUERY;
 		
 		Query query = session.createQuery(loginQuery);
 		
-		query.setParameter("username", user.getUsername());
+		query.setParameter(USERNAME_LABEL, user.getUsername());
 		
-		query.setParameter("password", user.getPassword());
+		query.setParameter(PASSWORD_LABEL, user.getPassword());
 		
 		User result = (User)query.getSingleResult();
 		
